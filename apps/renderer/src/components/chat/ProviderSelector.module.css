@@ -1,0 +1,129 @@
+.container {
+  position: relative;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  font-family: inherit;
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.trigger:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--glass-border-light);
+}
+
+.trigger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent);
+}
+
+.name {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.placeholder {
+  color: var(--color-text-muted);
+}
+
+.chevron {
+  color: var(--color-text-muted);
+  transition: transform var(--transition-fast);
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-dropdown);
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: var(--spacing-xs);
+  min-width: 200px;
+  padding: var(--spacing-xs);
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  z-index: calc(var(--z-dropdown) + 1);
+  animation: slideDown var(--transition-fast) ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: left;
+}
+
+.option:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.option.selected {
+  background: var(--color-accent-muted);
+}
+
+.optionContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.optionName {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.optionModel {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.option svg:last-child {
+  color: var(--color-accent);
+}

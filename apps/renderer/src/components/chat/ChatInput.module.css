@@ -1,0 +1,88 @@
+.container {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-top: 1px solid var(--glass-border);
+  background: rgba(15, 23, 42, 0.3);
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-fast);
+}
+
+.inputWrapper:focus-within {
+  border-color: var(--color-accent);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.textarea {
+  flex: 1;
+  min-height: 24px;
+  max-height: 200px;
+  padding: var(--spacing-sm);
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--color-text-primary);
+  resize: none;
+  outline: none;
+}
+
+.textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.sendButton {
+  width: 36px;
+  height: 36px;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancelButton {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm) !important;
+  font-size: var(--text-xs) !important;
+  color: #ef4444 !important;
+}
+
+.hint {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-xs);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  justify-content: center;
+}
+
+.hint kbd {
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}

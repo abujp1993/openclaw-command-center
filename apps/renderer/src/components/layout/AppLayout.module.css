@@ -1,0 +1,25 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  margin-top: var(--titlebar-height);
+}
+
+.main {
+  flex: 1;
+  overflow: hidden;
+  transition: margin-left var(--transition-normal);
+}
+
+.mainContent {
+  height: 100%;
+  overflow-y: auto;
+  padding: var(--spacing-lg);
+}

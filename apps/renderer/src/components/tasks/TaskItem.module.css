@@ -1,0 +1,235 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.subtask {
+  margin-left: var(--spacing-xl);
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) !important;
+  transition: all var(--transition-fast);
+}
+
+.item:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.item.completed {
+  opacity: 0.6;
+}
+
+.item.completed .title {
+  text-decoration: line-through;
+  color: var(--color-text-muted);
+}
+
+/* Checkbox */
+.checkbox {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 2px solid var(--glass-border-light);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  color: white;
+}
+
+.checkbox:hover {
+  border-color: var(--color-accent);
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.checkbox.checked {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* Content */
+.content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.title {
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  cursor: text;
+  word-break: break-word;
+}
+
+.editInput {
+  width: 100%;
+  padding: var(--spacing-xs);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  outline: none;
+}
+
+/* Meta info */
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.priority {
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.priority.high {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+.priority.medium {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+.priority.low {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+}
+
+.category {
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 500;
+}
+
+.dueDate {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.dueDate.overdue {
+  color: #ef4444;
+}
+
+.subtaskCount {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.item:hover .actions {
+  opacity: 1;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.actionButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-primary);
+}
+
+.actionButton.active {
+  color: var(--color-accent);
+}
+
+/* Menu */
+.menuWrapper {
+  position: relative;
+}
+
+.menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: var(--spacing-xs);
+  min-width: 120px;
+  padding: var(--spacing-xs);
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  z-index: var(--z-dropdown);
+}
+
+.menu button {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: left;
+}
+
+.menu button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-primary);
+}
+
+.menu button.danger:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+/* Subtasks */
+.subtasks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-xs);
+  padding-left: var(--spacing-md);
+  border-left: 2px solid var(--glass-border);
+  margin-left: 10px;
+}

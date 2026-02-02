@@ -1,0 +1,63 @@
+.titleBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--titlebar-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-md);
+  background: rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glass-border);
+  z-index: var(--z-sticky);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.logoIcon {
+  font-size: var(--text-lg);
+}
+
+.logoText {
+  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  letter-spacing: 0.5px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.controlButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.controlButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-primary);
+}
+
+.closeButton:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: var(--color-error);
+}
