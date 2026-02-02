@@ -1,9 +1,10 @@
 import { defineConfig, externalizeDepsPlugin } from 'electron-vite';
 import { resolve } from 'path';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   main: {
-    plugins: [externalizeDepsPlugin()],
+    plugins: [externalizeDepsPlugin({ exclude: ['@openclaw/shared', '@openclaw/database', '@openclaw/ai-providers'] })],
     build: {
       outDir: 'dist/main',
       rollupOptions: {
@@ -14,7 +15,7 @@ export default defineConfig({
     },
   },
   preload: {
-    plugins: [externalizeDepsPlugin()],
+    plugins: [externalizeDepsPlugin({ exclude: ['@openclaw/shared'] })],
     build: {
       outDir: 'dist/preload',
       rollupOptions: {
@@ -26,6 +27,12 @@ export default defineConfig({
   },
   renderer: {
     root: '../renderer',
+    plugins: [react()],
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, '../renderer/src'),
+      },
+    },
     build: {
       outDir: resolve(__dirname, '../renderer/dist'),
       rollupOptions: {
