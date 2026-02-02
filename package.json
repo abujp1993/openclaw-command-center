@@ -9,8 +9,13 @@
     "dev": "turbo run dev",
     "build": "turbo run build",
     "lint": "turbo run lint",
+    "test": "turbo run test",
     "clean": "turbo run clean && rm -rf node_modules",
-    "typecheck": "turbo run typecheck"
+    "typecheck": "turbo run typecheck",
+    "package": "turbo run package",
+    "package:win": "turbo run package:win",
+    "package:mac": "turbo run package:mac",
+    "package:linux": "turbo run package:linux"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
