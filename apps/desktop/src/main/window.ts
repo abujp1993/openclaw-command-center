@@ -77,6 +77,37 @@ export async function createWindow(): Promise<BrowserWindow> {
     mainWindow = null;
   });
 
+  // Prevent navigation to external URLs (security hardening)
+  mainWindow.webContents.on('will-navigate', (event, url) => {
+    const allowedOrigins = [
+      'file://',
+      process.env['ELECTRON_RENDERER_URL'] ?? '',
+    ].filter(Boolean);
+
+    const isAllowed = allowedOrigins.some((origin) => url.startsWith(origin));
+    if (!isAllowed) {
+      event.preventDefault();
+    }
+  });
+
+  // Open external links in the system browser instead of Electron
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+    shell.openExternal(url);
+    return { action: 'deny' };
+  });
+
+  // Set Content Security Policy headers
+  mainWindow.webContents.session.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+      responseHeaders: {
+        ...details.responseHeaders,
+        'Content-Security-Policy': [
+          "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' http://localhost:* https:; frame-src 'none'; object-src 'none'",
+        ],
+      },
+    });
+  });
+
   // Load the renderer
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
     await mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL']);

@@ -12,7 +12,17 @@ export class OllamaProvider extends BaseProvider {
   }
 
   private get baseUrl(): string {
-    return this.config.baseUrl ?? DEFAULT_OLLAMA_URL;
+    const url = this.config.baseUrl ?? DEFAULT_OLLAMA_URL;
+    try {
+      const parsed = new URL(url);
+      if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+        return DEFAULT_OLLAMA_URL;
+      }
+      // Return origin only to prevent path traversal via baseUrl
+      return parsed.origin;
+    } catch {
+      return DEFAULT_OLLAMA_URL;
+    }
   }
 
   async testConnection(): Promise<boolean> {
@@ -20,7 +30,9 @@ export class OllamaProvider extends BaseProvider {
       const response = await fetch(`${this.baseUrl}/api/tags`);
       return response.ok;
     } catch (error) {
-      console.error('Ollama connection test failed:', error);
+      if (process.env['NODE_ENV'] === 'development') {
+        console.error('Ollama connection test failed:', error);
+      }
       return false;
     }
   }
@@ -52,7 +64,7 @@ export class OllamaProvider extends BaseProvider {
     });
 
     if (!response.ok) {
-      throw new Error(`Ollama API error: ${response.statusText}`);
+      throw new Error(`Ollama API error: ${response.status}`);
     }
 
     const data = await response.json();
@@ -97,7 +109,7 @@ export class OllamaProvider extends BaseProvider {
       });
 
       if (!response.ok) {
-        throw new Error(`Ollama API error: ${response.statusText}`);
+        throw new Error(`Ollama API error: ${response.status}`);
       }
 
       const reader = response.body?.getReader();

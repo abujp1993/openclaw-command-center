@@ -32,7 +32,9 @@ export class ClaudeProvider extends BaseProvider {
       });
       return true;
     } catch (error) {
-      console.error('Claude connection test failed:', error);
+      if (process.env['NODE_ENV'] === 'development') {
+        console.error('Claude connection test failed:', error);
+      }
       return false;
     }
   }

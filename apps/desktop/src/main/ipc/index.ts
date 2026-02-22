@@ -6,6 +6,7 @@ import {
   hideMainWindow,
   showMainWindow,
 } from '../window';
+import { encryptSecret } from '../crypto';
 import type { IPCChannelName, IPCInput, NotificationInput } from '@openclaw/shared';
 
 // Import individual IPC handlers
@@ -54,9 +55,14 @@ export function registerAllIPCHandlers(): void {
 
   // Notifications
   handle('notification:show', (_, input: NotificationInput) => {
+    // Validate and sanitize notification inputs to prevent abuse
+    const title = String(input.title ?? '').slice(0, 100).trim();
+    const body = String(input.body ?? '').slice(0, 500).trim();
+    if (!title) return;
+
     const notification = new Notification({
-      title: input.title,
-      body: input.body,
+      title,
+      body,
       silent: input.silent ?? false,
     });
     notification.show();
@@ -215,12 +221,14 @@ export function registerAllIPCHandlers(): void {
 
   handle('ai:providers:create', async (_, input) => {
     // TODO: Implement with database
+    // Encrypt the API key at rest using OS-level encryption (safeStorage)
+    const encryptedApiKey = input.apiKey ? encryptSecret(input.apiKey) : undefined;
     const now = Date.now();
     return {
       id: `provider-${now}`,
       name: input.name,
       type: input.type,
-      apiKey: input.apiKey,
+      apiKey: encryptedApiKey,
       baseUrl: input.baseUrl,
       model: input.model,
       isActive: true,

@@ -1,6 +1,6 @@
 import initSqlJs, { Database as SqlJsDatabase } from 'sql.js';
 import { join } from 'path';
-import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync, mkdirSync, chmodSync } from 'fs';
 import { app } from 'electron';
 import { DB_NAME } from '@openclaw/shared';
 
@@ -22,9 +22,9 @@ function getDatabasePath(): string {
     userDataPath = process.env.APPDATA || process.env.HOME || '.';
   }
 
-  // Ensure directory exists
+  // Ensure directory exists with restricted permissions
   if (!existsSync(userDataPath)) {
-    mkdirSync(userDataPath, { recursive: true });
+    mkdirSync(userDataPath, { recursive: true, mode: 0o700 });
   }
 
   return join(userDataPath, DB_NAME);
@@ -44,7 +44,9 @@ export async function initializeDatabase(): Promise<SqlJsDatabase> {
   }
 
   dbPath = getDatabasePath();
-  console.log(`Initializing database at: ${dbPath}`);
+  if (process.env['NODE_ENV'] === 'development') {
+    console.log(`Initializing database at: ${dbPath}`);
+  }
 
   // Load existing database or create new one
   if (existsSync(dbPath)) {
@@ -77,7 +79,13 @@ export function saveDatabase(): void {
   if (db && dbPath) {
     const data = db.export();
     const buffer = Buffer.from(data);
-    writeFileSync(dbPath, buffer);
+    writeFileSync(dbPath, buffer, { mode: 0o600 });
+    // Ensure permissions are correct even on existing files
+    try {
+      chmodSync(dbPath, 0o600);
+    } catch {
+      // Non-fatal: chmod may fail on some platforms (e.g., Windows)
+    }
   }
 }
 

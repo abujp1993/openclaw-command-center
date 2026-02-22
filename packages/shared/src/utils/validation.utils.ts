@@ -84,14 +84,17 @@ export function validateApiKey(key: string): { valid: boolean; error?: string } 
 }
 
 /**
- * Validate URL format
+ * Validate URL format (http/https only)
  */
 export function validateUrl(url: string): { valid: boolean; error?: string } {
   if (isEmpty(url)) {
     return { valid: true }; // URL is optional
   }
   try {
-    new URL(url);
+    const parsed = new URL(url);
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+      return { valid: false, error: 'URL must use http or https protocol' };
+    }
     return { valid: true };
   } catch {
     return { valid: false, error: 'Invalid URL format' };
