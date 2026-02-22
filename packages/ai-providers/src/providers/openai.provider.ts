@@ -32,7 +32,9 @@ export class OpenAIProvider extends BaseProvider {
       });
       return true;
     } catch (error) {
-      console.error('OpenAI connection test failed:', error);
+      if (process.env['NODE_ENV'] === 'development') {
+        console.error('OpenAI connection test failed:', error);
+      }
       return false;
     }
   }

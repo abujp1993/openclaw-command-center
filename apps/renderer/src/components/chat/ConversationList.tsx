@@ -1,5 +1,5 @@
 import type { Conversation } from '@openclaw/shared';
-import { formatRelativeDate } from '@openclaw/shared';
+import { formatRelativeTime as formatRelativeDate } from '@openclaw/shared';
 import styles from './ConversationList.module.css';
 
 interface ConversationListProps {

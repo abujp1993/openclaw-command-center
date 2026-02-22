@@ -39,8 +39,8 @@ export function TaskList({ showCompleted = false }: TaskListProps) {
     }
 
     // Category filter
-    if (filters.categoryId) {
-      if (!task.categories?.some((c) => c.id === filters.categoryId)) {
+    if (filters.categoryIds && filters.categoryIds.length > 0) {
+      if (!task.categories?.some((c) => filters.categoryIds!.includes(c.id))) {
         return false;
       }
     }
@@ -53,7 +53,7 @@ export function TaskList({ showCompleted = false }: TaskListProps) {
   const inProgressTasks = filteredTasks.filter((t) => t.status === 'in_progress');
   const completedTasks = filteredTasks.filter((t) => t.status === 'completed');
 
-  const handlePriorityFilter = (priority: Priority | null) => {
+  const handlePriorityFilter = (priority: Priority | undefined) => {
     setFilters({ priority });
   };
 
@@ -86,7 +86,7 @@ export function TaskList({ showCompleted = false }: TaskListProps) {
         <div className={styles.filters}>
           <button
             className={`${styles.filterButton} ${!filters.priority ? styles.active : ''}`}
-            onClick={() => handlePriorityFilter(null)}
+            onClick={() => handlePriorityFilter(undefined)}
           >
             All
           </button>

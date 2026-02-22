@@ -18,7 +18,7 @@ export function ProviderSelector({ value, onChange }: ProviderSelectorProps) {
   const loadProviders = async () => {
     try {
       const data = await window.openclaw.providers.list();
-      setProviders(data.filter((p) => p.isActive));
+      setProviders(data.filter((p: AIProvider) => p.isActive));
       // Auto-select first provider if none selected
       if (!value && data.length > 0) {
         onChange(data[0].id);

@@ -1,4 +1,5 @@
-import { InputHTMLAttributes, forwardRef, ReactNode } from 'react';
+import { forwardRef } from 'react';
+import type { InputHTMLAttributes, ReactNode } from 'react';
 import clsx from 'clsx';
 import styles from './GlassInput.module.css';
 

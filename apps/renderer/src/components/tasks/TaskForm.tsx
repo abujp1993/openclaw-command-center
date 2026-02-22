@@ -11,7 +11,8 @@ interface TaskFormProps {
 }
 
 export function TaskForm({ parentId, onClose, onSubmit }: TaskFormProps) {
-  const { createTask, categories } = useTaskStore();
+  const { createTask } = useTaskStore();
+  const categories: { id: string; name: string; color: string }[] = [];
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState<Priority>('medium');

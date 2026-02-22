@@ -45,13 +45,15 @@ export function registerShortcut(accelerator: string, callback: () => void): boo
 
     if (success) {
       registeredShortcuts.add(electronAccelerator);
-    } else {
+    } else if (process.env['NODE_ENV'] === 'development') {
       console.warn(`Failed to register shortcut: ${accelerator}`);
     }
 
     return success;
   } catch (error) {
-    console.error(`Error registering shortcut ${accelerator}:`, error);
+    if (process.env['NODE_ENV'] === 'development') {
+      console.error(`Error registering shortcut ${accelerator}:`, error);
+    }
     return false;
   }
 }
