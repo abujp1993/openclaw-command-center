@@ -62,7 +62,7 @@ export class SettingsRepository {
         const keys = row.key.split('.');
 
         // Navigate to the nested property
-        let current: Record<string, unknown> = settings;
+        let current: Record<string, unknown> = settings as unknown as Record<string, unknown>;
         for (let i = 0; i < keys.length - 1; i++) {
           if (current[keys[i]] === undefined) {
             current[keys[i]] = {};

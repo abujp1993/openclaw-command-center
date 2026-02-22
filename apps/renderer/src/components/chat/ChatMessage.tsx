@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import type { Message } from '@openclaw/shared';
-import { formatTime } from '@openclaw/shared';
+import { formatDate as formatTime } from '@openclaw/shared';
 import { CodeBlock } from './CodeBlock';
 import styles from './ChatMessage.module.css';
 

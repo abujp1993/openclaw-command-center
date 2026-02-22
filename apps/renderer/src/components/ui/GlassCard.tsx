@@ -1,4 +1,4 @@
-import { ReactNode, HTMLAttributes } from 'react';
+import type { ReactNode, HTMLAttributes } from 'react';
 import clsx from 'clsx';
 import styles from './GlassCard.module.css';
 

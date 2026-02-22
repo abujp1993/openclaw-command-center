@@ -67,7 +67,7 @@ export class OllamaProvider extends BaseProvider {
       throw new Error(`Ollama API error: ${response.status}`);
     }
 
-    const data = await response.json();
+    const data = (await response.json()) as { message?: { content?: string }; eval_count?: number };
 
     return {
       content: data.message?.content ?? '',

@@ -1,4 +1,5 @@
-import initSqlJs, { Database as SqlJsDatabase } from 'sql.js';
+import initSqlJs from 'sql.js';
+import type { Database as SqlJsDatabase, SqlJsStatic } from 'sql.js';
 import { join } from 'path';
 import { existsSync, readFileSync, writeFileSync, mkdirSync, chmodSync } from 'fs';
 import { app } from 'electron';
@@ -6,7 +7,7 @@ import { DB_NAME } from '@openclaw/shared';
 
 let db: SqlJsDatabase | null = null;
 let dbPath: string = '';
-let SQL: initSqlJs.SqlJsStatic | null = null;
+let SQL: SqlJsStatic | null = null;
 
 /**
  * Get the database file path

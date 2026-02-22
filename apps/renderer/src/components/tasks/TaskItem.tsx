@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import type { Task } from '@openclaw/shared';
-import { formatRelativeDate } from '@openclaw/shared';
+import { formatRelativeTime as formatRelativeDate } from '@openclaw/shared';
 import { useTaskStore } from '../../stores/taskStore';
 import { GlassCard } from '../ui';
 import styles from './TaskItem.module.css';

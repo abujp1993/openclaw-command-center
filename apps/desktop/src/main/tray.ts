@@ -9,7 +9,7 @@ export function createTray(): void {
   const iconPath = join(__dirname, '../../resources/icon.png');
 
   // Create a simple icon if the file doesn't exist
-  let icon: nativeImage;
+  let icon: Electron.NativeImage;
   try {
     icon = nativeImage.createFromPath(iconPath);
     if (icon.isEmpty()) {
